@@ -5,6 +5,14 @@ public class CustomerRequestDTO {
     private String firstName;
     private String lastName;
 
+    public CustomerRequestDTO(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public CustomerRequestDTO() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

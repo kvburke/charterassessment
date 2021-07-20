@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService{
         //Filter and sum points for purchases in 50-100 dollar range
         List<Long> pricesForOnePoint = prices.stream().filter(onePoint).collect(Collectors.toList());
 
-        Long sumPricesForOnePoint= pricesForOnePoint.stream().reduce(0L, (a, b) -> a + b) -50L;
+        Long sumPricesForOnePoint= pricesForOnePoint.stream().reduce(0L, (a, b) -> a + b) -(50L* pricesForOnePoint.size());
 
         //Recalibrate to 0 customer did not gain any rewards points
         if(sumPricesForOnePoint<0L){
@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService{
         //Filter and sum points for purchases in 100+ dollar range
         List<Long> pricesForTwoPoint= prices.stream().filter(twoPoints).collect(Collectors.toList());
 
-        Long sumPricesForTwoPoints= pricesForTwoPoint.stream().map(x->x*2).reduce(0L, (a, b) -> a + b) -150L;
+        Long sumPricesForTwoPoints= pricesForTwoPoint.stream().map(x->x*2).reduce(0L, (a, b) -> a + b) - (150L* pricesForTwoPoint.size());
 
         //Recalibrate to 0 customer did not gain any rewards points
         if(sumPricesForTwoPoints<0L){

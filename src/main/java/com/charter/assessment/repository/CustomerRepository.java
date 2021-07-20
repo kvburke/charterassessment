@@ -18,7 +18,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 
 
-    public static interface SumOnly {
-        Long getPrice();
-    }
+
 }

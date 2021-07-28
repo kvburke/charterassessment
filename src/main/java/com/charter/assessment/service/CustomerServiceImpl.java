@@ -1,7 +1,9 @@
 package com.charter.assessment.service;
 
 import com.charter.assessment.dto.CustomerRequestDTO;
+import com.charter.assessment.exception.ApiRequestException;
 import com.charter.assessment.repository.CustomerRepository;
+import com.charter.assessment.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,26 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    PurchaseRepository purchaseRepository;
+
     @Override
     public Long getCustomerRewardPoints(CustomerRequestDTO name) {
         //Sum of rewards points
         Long rewardSum;
+
+        //Check error conditions
+        if("".equals(name.getFirstName())||"".equals(name.getLastName())||(name.getFirstName()==null)||(name.getLastName()==null)){
+            throw new ApiRequestException("no name provided");
+        }
+        Long size= customerRepository.doesCustomerExist(name.getFirstName(), name.getLastName());
+
+        if(size==0){
+            throw new ApiRequestException("name does not exist");
+        }
+
         //Get purchases of customer
-        List<Long> prices= customerRepository.findPurchasesByName(name.getFirstName(), name.getLastName());
+        List<Long> prices= purchaseRepository.findPurchasesByName(name.getFirstName(), name.getLastName());
 
         Predicate<Long> onePoint= range -> {
             if(range>50 && range<=100){

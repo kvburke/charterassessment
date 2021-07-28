@@ -11,12 +11,10 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 
-    @Query(value = "select price from purchase p "+
-            "inner join customer c on p.customer_id = c.id "+
-            "where c.first_name = ?1 and c.last_name = ?2", nativeQuery = true)
-    List<Long> findPurchasesByName(String firstName, String lastName);
 
-
+    @Query(value = "select count(*) from customer c "+
+            "where c.first_name = ?1 and c.last_name = ?2", nativeQuery = true )
+    Long doesCustomerExist(String firstName, String lastName);
 
 
 }

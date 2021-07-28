@@ -30,6 +30,7 @@ public class AssessmentApplication {
 			purchaseList.add(new Purchase("1/21 Internet", new BigDecimal(101.00), firstCustomer));
 			purchaseList.add(new Purchase("1/21 Landline", new BigDecimal(101.00), firstCustomer));
 			purchaseList.add(new Purchase("1/21 Landline", new BigDecimal(150.00), firstCustomer));
+			purchaseList.add(new Purchase("1/21 Landline", new BigDecimal(52.00), firstCustomer));
 
 			firstCustomer.setPurchases(purchaseList);
 

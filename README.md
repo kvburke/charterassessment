@@ -20,7 +20,7 @@ Content-Type: application/json
 Accept: */*
 
 
-Request Body:
+Request:
 
 {
   "firstName": "Kevin",
@@ -29,5 +29,6 @@ Request Body:
 
 Response:
 
-255
-
+{
+    "rewardsPoints": 257
+}
